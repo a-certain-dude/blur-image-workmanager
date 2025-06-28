@@ -5,6 +5,7 @@ At I/O 2018, Google announced [Android Jetpack](https://developer.android.com/je
 
 Pre-requisites
 --------------
+* Open notification settings in the app and enable it
 
 * Familiarity with how to open, build, and run apps with Android Studio.
 
