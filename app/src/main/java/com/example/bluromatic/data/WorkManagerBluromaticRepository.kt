@@ -28,6 +28,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
 
     override val outputWorkInfo: Flow<WorkInfo?> = MutableStateFlow(null)
+    private val workManager = WorkManager.getInstance(context = context)
 
     /**
      * Create the WorkRequests to apply the blur and save the resulting image
