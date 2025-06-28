@@ -34,7 +34,10 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
      * Create the WorkRequests to apply the blur and save the resulting image
      * @param blurLevel The amount to blur the image
      */
-    override fun applyBlur(blurLevel: Int) {}
+    override fun applyBlur(blurLevel: Int) {
+        val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
+        workManager.enqueue(blurBuilder.build())
+    }
 
     /**
      * Cancel any ongoing WorkRequests
