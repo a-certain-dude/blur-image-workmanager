@@ -12,6 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
+private const val TAG = "blurWorker"
+
 class BlurWorker(ctx: Context, params: WorkerParameters) :
         CoroutineWorker(appContext = ctx, params = params) {
     override suspend fun doWork(): Result {
