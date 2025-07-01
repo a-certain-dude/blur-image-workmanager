@@ -43,7 +43,11 @@ class BlurWorker(ctx: Context, params: WorkerParameters) :
                 
                 Result.success(outputData)
             } catch (throwable: Throwable) {
-                Log.e("blurImage", applicationContext.getString(R.string.error_applying_blur),throwable)
+                Log.e(
+                    "blurImage",
+                    applicationContext.resources.getString(R.string.error_applying_blur),
+                    throwable
+                )
                 Result.failure()
             }
         }
