@@ -22,11 +22,16 @@ class BlurWorker(ctx: Context, params: WorkerParameters) :
         
         return  withContext(context = Dispatchers.IO){
             return@withContext try {
-                delay(DELAY_TIME_MILLIS)
-                val picture: Bitmap = BitmapFactory.decodeResource(
-                    applicationContext.resources,
-                    R.drawable.android_cupcake
-                )
+                require(!resourceUri.isNullOrBlank()) {
+                    val errorMessage =
+                        applicationContext.resources.getString(R.string.invalid_input_uri)
+                    Log.e(TAG, errorMessage)
+                }
+                val resolver = applicationContext.contentResolver
+                
+                val picture =
+                    BitmapFactory.decodeStream(resolver.openInputStream(Uri.parse(resourceUri)))
+                
                 val output = blurBitmap(bitmap = picture, blurLevel = 1)
                 val outputUri = writeBitmapToFile(
                     applicationContext = applicationContext, bitmap = output
