@@ -39,7 +39,7 @@ class BlurWorker(ctx: Context, params: WorkerParameters) :
                 
                 val outputData =workDataOf(KEY_IMAGE_URI to outputUri.toString())
                 
-                makeStatusNotification(message = "Output $outputUri", context = applicationContext)
+                    // makeStatusNotification(message = "Output $outputUri", context = applicationContext)
                 
                 Result.success(outputData)
             } catch (throwable: Throwable) {
