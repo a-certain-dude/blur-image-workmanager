@@ -32,7 +32,7 @@ class BlurWorker(ctx: Context, params: WorkerParameters) :
                 val picture =
                     BitmapFactory.decodeStream(resolver.openInputStream(Uri.parse(resourceUri)))
                 
-                val output = blurBitmap(bitmap = picture, blurLevel = 1)
+                val output = blurBitmap(bitmap = picture, blurLevel)
                 val outputUri = writeBitmapToFile(
                     applicationContext = applicationContext, bitmap = output
                 )
