@@ -35,7 +35,8 @@ class BlurWorker(ctx: Context, params: WorkerParameters) :
                 val outputData =workDataOf(KEY_IMAGE_URI to outputUri.toString())
                 
                 makeStatusNotification(message = "Output $outputUri", context = applicationContext)
-                Result.success()
+                
+                Result.success(outputData)
             } catch (throwable: Throwable) {
                 Log.e("blurImage", applicationContext.getString(R.string.error_applying_blur),throwable)
                 Result.failure()
