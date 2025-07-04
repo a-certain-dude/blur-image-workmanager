@@ -15,5 +15,26 @@ class CleanUpWorker(ctx: Context, params: WorkerParameters) :
             message = applicationContext.resources.getString(R.string.cleaning_up_files),
             context = applicationContext
         )
+        return withContext(context = Dispatchers.IO){
+            delay(timeMillis = DELAY_TIME_MILLIS)
+            return@withContext try {
+             val outputDirectory = File(applicationContext.filesDir, OUTPUT_PATH)
+              val entries = outputDirectory.listFiles()
+                if (entries!=null){
+                    for (entry in entries){
+                     val name = entry.name
+                        if (name.isNotEmpty() &&  name.endsWith(".png")){
+                            val deleted =  entry.delete()
+                            Log.i(TAG, "Deleted $name - $deleted")
+                        }
+                    }
+                }
+                Result.success()
+                
+            }catch (exception:Exception){
+                Log.e(TAG,applicationContext.resources.getString(R.string.error_cleaning_file),exception)
+                Result.failure()
+            }
+        }
     }
 }
