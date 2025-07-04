@@ -7,6 +7,9 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.bluromatic.R
 
+
+/* worker to clean up files generated during blurring process */
+private const val TAG="CleanUpWorker"
 class CleanUpWorker(ctx: Context, params: WorkerParameters) :
         CoroutineWorker(appContext = ctx, params = params) {
     @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
