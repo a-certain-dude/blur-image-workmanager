@@ -41,6 +41,9 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
      * @param blurLevel The amount to blur the image
      */
     override fun applyBlur(blurLevel: Int) {
+        //add workRequest to clean up temporary images
+        var continuation = workManager.beginWith(OneTimeWorkRequest.from(CleanUpWorker::class.java))
+        //add workRequst to blur the image
         val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
         blurBuilder.setInputData(inputData = createInputDataForWorkRequest(blurLevel,imageUri))
         workManager.enqueue(blurBuilder.build())
