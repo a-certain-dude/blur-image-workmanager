@@ -41,6 +41,15 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
      * @param blurLevel The amount to blur the image
      */
     override fun applyBlur(blurLevel: Int) {
+        
+        /*
+                This code produces and runs the
+                following chain of WorkRequests: a CleanupWorker WorkRequest
+                 followed by a BlurWorker WorkRequest
+                 followed by a SaveImageToFileWorker WorkRequest.
+        */
+        
+        
         //add workRequest to clean up temporary images
         var continuation = workManager.beginWith(OneTimeWorkRequest.from(CleanUpWorker::class.java))
         //add workRequst to blur the image
