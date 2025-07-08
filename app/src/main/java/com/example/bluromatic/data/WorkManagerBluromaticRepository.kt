@@ -50,7 +50,7 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
         /* add work request to save the image to the filesystem */
         var save  = OneTimeWorkRequestBuilder<SaveImageToFileWorker>().build()
         continuation = continuation.then(save)
-        continuation.enqueue()
+        continuation.enqueue() /* start the work */
     }
 
     /**
