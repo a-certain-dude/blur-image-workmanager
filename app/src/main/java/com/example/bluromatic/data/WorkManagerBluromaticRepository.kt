@@ -51,6 +51,9 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
         
         
         //add workRequest to clean up temporary images
+        // Blur-O-Matic now only blurs one image at a time.
+        
+        
         var continuation =
             workManager.beginUniqueWork(
                 uniqueWorkName = IMAGE_MANIPULATION_WORK_NAME,
