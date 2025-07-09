@@ -51,7 +51,12 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
         
         
         //add workRequest to clean up temporary images
-        var continuation = workManager.beginWith(OneTimeWorkRequest.from(CleanUpWorker::class.java))
+        var continuation =
+            workManager.beginUniqueWork(
+                uniqueWorkName = IMAGE_MANIPULATION_WORK_NAME,
+                existingWorkPolicy = ExistingWorkPolicy.REPLACE,
+                request = OneTimeWorkRequest.from(workerClass =  CleanUpWorker::class.java)
+            )
         //add workRequst to blur the image
         val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
         blurBuilder.setInputData(inputData = createInputDataForWorkRequest(blurLevel,imageUri))
