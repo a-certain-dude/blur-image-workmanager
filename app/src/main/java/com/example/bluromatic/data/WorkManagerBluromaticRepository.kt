@@ -65,7 +65,7 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
         blurBuilder.setInputData(inputData = createInputDataForWorkRequest(blurLevel,imageUri))
         continuation = continuation.then(blurBuilder.build()) /* add the blurBuilder to the chain*/
         /* add work request to save the image to the filesystem */
-        var save  = OneTimeWorkRequestBuilder<SaveImageToFileWorker>().build()
+        var save = OneTimeWorkRequestBuilder<SaveImageToFileWorker>().addTag(tag = TAG_OUTPUT).build()
         continuation = continuation.then(save)
         continuation.enqueue() /* start the work */
     }
