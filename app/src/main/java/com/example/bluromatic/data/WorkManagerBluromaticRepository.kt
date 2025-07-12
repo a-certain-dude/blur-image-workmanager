@@ -35,7 +35,9 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
 
     override val outputWorkInfo: Flow<WorkInfo?> = MutableStateFlow(null)
     private val workManager = WorkManager.getInstance(context = context)
-
+    override val outputWorkInfo = workManager.getWorkInfosByTagLiveData(tag = TAG_OUTPUT).asFlow()
+        .mapNotNull { if (it.isEmpty()) it.first() else null }
+    
     /**
      * Create the WorkRequests to apply the blur and save the resulting image
      * @param blurLevel The amount to blur the image
