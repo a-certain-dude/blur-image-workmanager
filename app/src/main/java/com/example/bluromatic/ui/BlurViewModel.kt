@@ -36,6 +36,7 @@ class BlurViewModel(private val bluromaticRepository: BluromaticRepository) : Vi
     internal val blurAmount = BlurAmountData.blurAmount
 
     val blurUiState: StateFlow<BlurUiState> = MutableStateFlow(BlurUiState.Default)
+    val blurUiState: StateFlow<BlurUiState> = bluromaticRepository.outputWorkInfo
 
     /**
      * Call the method from repository to create the WorkRequest to apply the blur
