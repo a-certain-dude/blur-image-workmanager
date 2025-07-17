@@ -35,8 +35,18 @@ class BlurViewModel(private val bluromaticRepository: BluromaticRepository) : Vi
 
     internal val blurAmount = BlurAmountData.blurAmount
 
-    val blurUiState: StateFlow<BlurUiState> = MutableStateFlow(BlurUiState.Default)
-    val blurUiState: StateFlow<BlurUiState> = bluromaticRepository.outputWorkInfo
+    //val blurUiState: StateFlow<BlurUiState> = MutableStateFlow(BlurUiState.Default)
+    val blurUiState: StateFlow<BlurUiState> = bluromaticRepository.outputWorkInfo.map{
+        info -> when{
+            info.state.isFinished->{
+                BlurUiState.Complete(outputUri = "")
+            }
+        info.state == WorkInfo.State.CANCELLED->{
+            BlurUiState.Default
+        }
+        else -> BlurUiState.Loading
+        }
+    }
 
     /**
      * Call the method from repository to create the WorkRequest to apply the blur
