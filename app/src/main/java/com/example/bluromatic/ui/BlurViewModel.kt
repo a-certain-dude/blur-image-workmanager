@@ -46,7 +46,7 @@ class BlurViewModel(private val bluromaticRepository: BluromaticRepository) : Vi
         }
         else -> BlurUiState.Loading
         }
-    }
+    }.stateIn(scope = viewModelScope, started = SharingStarted.WhileSubscribed(5_000), initialValue = BlurUiState.Default)
 
     /**
      * Call the method from repository to create the WorkRequest to apply the blur
