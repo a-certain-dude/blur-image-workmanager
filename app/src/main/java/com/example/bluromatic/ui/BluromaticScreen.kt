@@ -147,6 +147,21 @@ private fun BlurActions(
             Text(stringResource(R.string.start))
         }
     }
+    when (blurUiState) {
+        is BlurUiState.Default -> {
+            Button(
+                onClick = onStartClick
+            ) { Text(text = stringResource(id = R.string.start)) }
+        }
+        
+        is BlurUiState.Loading -> {
+            FilledTonalButton(onClick = onCancelClick)
+         { Text(text = stringResource(R.string.cancel_work))}
+            CircularProgressIndicator(modifier = Modifier.padding(R.dimen.padding_small))
+        }
+        
+        is BlurUiState.Complete ->  { Button(onClick = onStartClick) { Text( text = stringResource(R.string.start)) }}
+    }
 }
 
 @Composable
