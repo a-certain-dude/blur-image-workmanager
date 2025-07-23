@@ -140,12 +140,12 @@ private fun BlurActions(
         modifier = modifier,
         horizontalArrangement = Arrangement.Center
     ) {
-        Button(
-            onClick = onStartClick,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(stringResource(R.string.start))
-        }
+        /*   Button(
+              onClick = onStartClick,
+              modifier = Modifier.fillMaxWidth()
+          ) {
+              Text(stringResource(R.string.start))
+          } */
     }
     when (blurUiState) {
         is BlurUiState.Default -> {
